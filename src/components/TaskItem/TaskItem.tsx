@@ -1,10 +1,10 @@
 import type { TaskItemProps, TaskStatus } from "../../types";
 
-export const TaskItem: React.FC<TaskItemProps> = ({
+export const TaskItem = ({
   task,
   onStatusChange,
   onDelete,
-}) =>{
+}:TaskItemProps) =>{
 
   //Pending / in-progress /completed /pending 
   const getStatus =(current : TaskStatus): TaskStatus =>{
@@ -12,23 +12,28 @@ export const TaskItem: React.FC<TaskItemProps> = ({
     if (current === "in-progress") return "completed";
     return "pending";
   }
-  const statusClass ={
+  const statusBadgeClass ={
     pending :'bg-warning text-dark',
     'in-progress': 'bg-primary',
     completed: 'bg-success'
   }[task.status];
   
-const priorityClass = {
+const priorityBadgeClass = {
     low: 'bg-success',
     medium: 'bg-warning text-dark',
     high: 'bg-danger'
   }[task.priority];
+  const priorityBorderClass = {
+    low: 'border-success',
+    medium: 'border-warning',
+    high: 'border-danger'
+  }[task.priority];
   return(
-    <div className={`card shadow-sm mb-3 border-start border-5 ${priorityClass}`}>
+    <div className={`card shadow-sm mb-3 border-start border-5 ${priorityBorderClass}`}>
       <div className="card-body">
         <div className="d-flex justify-content-between align-items-start mb-2">
           <h5 className="card-title mb-1">{task.title}</h5>
-          <span className={`badge ${priorityClass} fs-6`}> {task.priority.toUpperCase()}</span>
+          <span className={`badge ${priorityBadgeClass} fs-6`}> {task.priority.toUpperCase()}</span>
 </div>
       </div>
       <p className="card-text text-muted mb-3">{task.description}</p>
@@ -37,7 +42,7 @@ const priorityClass = {
             Due: {task.dueDate}
           </small>
 
-          <span className={`badge ${statusClass} px-3 py-2`}>
+          <span className={`badge ${statusBadgeClass} px-3 py-2`}>
             {task.status.replace('-', ' ').toUpperCase()}
           </span>
         </div>

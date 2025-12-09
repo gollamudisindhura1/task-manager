@@ -7,9 +7,13 @@ function App() {
 
   return (
     <>
-      
+      <h1>Task Management</h1>
+      <main>
+        <section>
+        
+        </section>
+      </main>
     </>
   )
 }
-
 export default App
