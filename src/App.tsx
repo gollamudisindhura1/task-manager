@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// src/App.tsx
 
 import { useState } from 'react';
 import { TaskList } from './components/TaskList/TaskList';
@@ -210,7 +208,6 @@ function App() {
         </div>
     </div>
       </div>
-  
   );
 }
 

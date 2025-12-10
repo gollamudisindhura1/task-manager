@@ -1,73 +1,33 @@
-# React + TypeScript + Vite
+# Task Manager - Lab 3
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Creating a Task Management application that demonstrates dynamic list rendering, proper key usage, and conditional rendering. You will practice creating TypeScript React components that handle lists of data, implement filtering, and show different states based on task properties. This lab focuses on list rendering, key management, conditional rendering, and component composition using React and TypeScript.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+1. Display list of tasks
+2. Filter tasks by status and priority
+3. Add new tasks
+4. Change task status
+5. Delete tasks
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Resources Used
+- https://react.dev/ Main React Documentation
+- https://www.typescriptlang.org/docs/ Typescript guide
+- https://getbootstrap.com/docs/5.3/ Bootstrap CSS framework
+- https://vitejs.dev/guide/ Vite build tool
 
-## Expanding the ESLint configuration
+## Reflection Questions
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. How did you ensure unique keys for your list items?
+- I used task.id as the key for each task. Every task has a unique ID, so React can track each task properly when the list changes.
+2. What considerations did you make when implementing the filtering functionality?
+- I made sure both filters status and priority work together. When you change one filter, the other one stays active. I used state in TaskFilter to remember both filter values and pass them both to the parent component.
+3. How did you handle state updates for task status changes?
+- I used the map() method to create a new array with the updated task. This keeps React's immutable state pattern - I never change the original array, I create a new one.
+4. What challenges did you face when implementing conditional rendering?
+- The main challenge was deciding where to put the logic. I used:
+     - Ternary operator (? :) for showing "No tasks" message vs task list
+     - Logical AND (&&) for showing the add task form only when needed
+     - Making sure the empty state was clear and helpful to users
